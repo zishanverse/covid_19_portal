@@ -31,14 +31,14 @@ app.post("/login/", async (request, response) => {
   const userDetails = await db.get(userDetailsQuery);
 
   if (userDetails === undefined) {
-    response.state(400);
-    response.send("Invalid User");
+    response.status(400);
+    response.send("Invalid user");
   } else {
     const checkPassword = await bcrypt.compare(password, userDetails.password);
 
     if (checkPassword === false) {
-      response.state(400);
-      response.send("Invalid Password");
+      response.status(400);
+      response.send("Invalid password");
     } else {
       const payload = { username: username };
       const jwtoken = await jwt.sign(payload, "MY_SECRET");
@@ -200,4 +200,4 @@ app.get(
   }
 );
 
-module.exports app;
+module.exports = app;
