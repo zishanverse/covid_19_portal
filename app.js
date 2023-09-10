@@ -195,7 +195,7 @@ app.get(
     FROM district 
     WHERE state_id =${stateId};`;
 
-    const result = await db.all(query);
+    const result = await db.get(query);
     response.send(result);
   }
 );
